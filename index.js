@@ -3,9 +3,12 @@ const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 const { MessageActionRow, MessageButton } = require('discord.js');
 const mysql = require('mysql'); // Base de données MySQL
+const prefix = require('./config.json').prefix;
 const schedule = require('node-schedule'); // Envoi automatique de message
+
 require('discord-reply'); //⚠️ IMPORTANT: put this before your discord.Client()
 
+/*
 // Création de la connexion à la DB
 const db = mysql.createConnection({
 
@@ -21,71 +24,101 @@ db.connect(function(err) {
 if (err) throw err;
 console.log("Connecté à la base de données MySQL!");
 });
-
-const job = schedule.scheduleJob('05 57 15 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
-console.log('The answer to life, the universe, and everything!');
-});
+*/
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MESSAGES] });
 
-// When the client is ready, run this code (only once)
+
 client.once('ready', () => {
-	console.log('Ready!');
+	console.log('Bot prêt !');
 });
 
 client.on('message', message => {
+    let args = message.content.split(" ");
+    let command = args.shift().toLowerCase();
+    
+    if(!command.startsWith(prefix)) return;
 
-        switch(true) {
-            case message.content.includes("infos"):
-                message.channel.send("L'id du serveur est : " + message.guild.id);
-                message.channel.send("L'id du channel est : " + message.channel.id);
-                console.log(message);
-                message.channel.send(" Ton nom : " + message.author.username);
-                message.channel.send(" Ton # : " + message.author.discriminator);
-                message.channel.send(" Ton id unique : " + message.author.id);
-                break;
-            case message.content.includes("test bot"):
-                message.channel.send("Ton test marche");
-                break;
-            case message.content.includes("quoi"):
-                message.channel.send("feur");
-                break;
-            case message.content.includes("classe"):
-                if (message.author.bot) {
-                    return;
-                }
-                else
-                {
-                const row = new MessageActionRow()
-                .addComponents(
-                    new MessageButton()
-                        .setCustomId('primary')
-                        .setLabel('Archer')
-                        .setStyle('PRIMARY'),
-                    new MessageButton()
-                        .setCustomId('primary')
-                        .setLabel('Mage')
-                        .setStyle('PRIMARY'),
-                    new MessageButton()
-                        .setCustomId('primary')
-                        .setLabel('Epeiste')
-                        .setStyle('PRIMARY'),
-                    new MessageButton()
-                        .setCustomId('primary')
-                        .setLabel('Primary')
-                        .setStyle('PRIMARY'),
-                );
-                message.channel.send({ content: 'Choisis ta classe !', components: [row] });
-                }
-                    
-                break;
-            case message.content.includes("ping moi"):
-                message.channel.send("Kiza t'es trop moche");
-                break;
-        }
+    switch(command){
+        case prefix + 'ping':
+            require('./commands/ping.js').execute(client, message, args);
+            break;
+        case prefix + 'botinfos':
+            require('./commands/botinfos.js').execute(client, message, args);
+            break;
+        case prefix + 'classe':
+            require('./commands/choose_class.js').execute(client, message, args);
+            break;
+    }
     
 });
 
-// Login to Discord with your client's token
+// CI ASGOBAS //
+
+// 11h30 à 5min
+const ci_asgobas_11h30_1 = schedule.scheduleJob('00 25 11 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 11h30 à 5min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
+});
+
+// 11h30 à 1min
+const ci_asgobas_11h30_2 = schedule.scheduleJob('00 29 11 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 11h30 à 1min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
+});
+
+// 17h30 à 5min
+const ci_asgobas_17h30_1 = schedule.scheduleJob('00 25 17 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 17h30 à 5min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
+});
+
+// 17h30 à 1min
+const ci_asgobas_17h30_2 = schedule.scheduleJob('00 29 17 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 17h30 à 1min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
+});
+
+// 21h30 à 5min
+const ci_asgobas_21h30_1 = schedule.scheduleJob('00 25 21 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 21h30 à 5min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
+});
+
+// 21h30 à 1min
+const ci_asgobas_21h30_2 = schedule.scheduleJob('00 29 21 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 21h30 à 1min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
+});
+
+// 23h30 à 5min
+const ci_asgobas_23h30_1 = schedule.scheduleJob('00 25 23 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 23h30 à 5min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
+});
+
+// 23h30 à 1min
+const ci_asgobas_23h30_2 = schedule.scheduleJob('00 29 23 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
+    console.log('Ci Asgobas 23h30 à 1min');
+    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
+
+    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
+});
+// ------------ //
+
 client.login(token);
