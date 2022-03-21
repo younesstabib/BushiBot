@@ -34,6 +34,7 @@ client.once('ready', () => {
 	console.log('Bot prêt !');
 });
 
+// Message Handlers with Prefix
 client.on('message', message => {
     let args = message.content.split(" ");
     let command = args.shift().toLowerCase();
@@ -52,6 +53,13 @@ client.on('message', message => {
             break;
     }
     
+});
+
+
+// Button Handler
+client.on('interactionCreate', interaction => {
+	if (!interaction.isButton()) return;
+	console.log(interaction);
 });
 
 // CI ASGOBAS //
