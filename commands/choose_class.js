@@ -20,7 +20,7 @@ module.exports = {
                 .setLabel('Mage')
                 .setStyle('SECONDARY'),
             new MessageButton()
-                .setCustomId('epeiste')
+                .setCustomId('escri')
                 .setLabel('Epeiste')
                 .setStyle('SECONDARY'),
             new MessageButton()
