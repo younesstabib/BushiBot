@@ -52,6 +52,9 @@ client.on('message', message => {
         case prefix + 'classe':
             require('./commands/choose_class.js').execute(client, message, args);
             break;
+        case prefix + 'card':
+            require('./commands/canvas.js').execute(client, message, args);
+            break;
     }
     
 });
