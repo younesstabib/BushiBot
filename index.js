@@ -64,7 +64,6 @@ client.on('interactionCreate', async (interaction) => {
 
     // Attribution de la classe du personnage selon le choix de l'utilisateur
     //TODO 
-    console.log("id du bouton " + interaction.customId);
     switch(interaction.customId){
         case "archer":
             interaction.channel.send("Tu as choisis la classe Archer");
@@ -79,7 +78,7 @@ client.on('interactionCreate', async (interaction) => {
             // Enregistrement dans la db 
             break;
         case "am":
-            interaction.channel.send("Tu as choisis la classe Artiste Martial (martial comme le joueur ^^)");
+            interaction.channel.send("Tu as choisis la classe Artiste Martial");
             // Enregistrement dans la db 
             break;
     }
@@ -96,28 +95,12 @@ const ci_asgobas_11h30_1 = schedule.scheduleJob('00 25 11 * * *', function(){ //
     channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
 });
 
-// 11h30 à 1min
-const ci_asgobas_11h30_2 = schedule.scheduleJob('00 29 11 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
-    console.log('Ci Asgobas 11h30 à 1min');
-    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
-
-    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
-});
-
 // 17h30 à 5min
 const ci_asgobas_17h30_1 = schedule.scheduleJob('00 25 17 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
-    console.log('Ci Asgobas 11h30 à 1min');
+    console.log('Ci Asgobas 17h30 à 5min');
     const channel = client.channels.cache.find(channel => channel.name === "asgobas");
 
     channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
-});
-
-// 17h30 à 1min
-const ci_asgobas_17h30_2 = schedule.scheduleJob('00 29 17 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
-    console.log('Ci Asgobas 17h30 à 1min');
-    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
-
-    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
 });
 
 // 21h30 à 5min
@@ -128,28 +111,12 @@ const ci_asgobas_21h30_1 = schedule.scheduleJob('00 25 21 * * *', function(){ //
     channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
 });
 
-// 21h30 à 1min
-const ci_asgobas_21h30_2 = schedule.scheduleJob('00 29 21 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
-    console.log('Ci Asgobas 21h30 à 1min');
-    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
-
-    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
-});
-
 // 23h30 à 5min
 const ci_asgobas_23h30_1 = schedule.scheduleJob('00 25 23 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
     console.log('Ci Asgobas 23h30 à 5min');
     const channel = client.channels.cache.find(channel => channel.name === "asgobas");
 
     channel.send("Le ci asgobas commencera dans 5 minutes <@&955242284180463697>");
-});
-
-// 23h30 à 1min
-const ci_asgobas_23h30_2 = schedule.scheduleJob('00 29 23 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
-    console.log('Ci Asgobas 23h30 à 1min');
-    const channel = client.channels.cache.find(channel => channel.name === "asgobas");
-
-    channel.send("Le ci asgobas commencera dans 1 minutes <@&955242284180463697>");
 });
 // ------------ //
 
