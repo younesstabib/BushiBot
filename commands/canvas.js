@@ -2,7 +2,7 @@ const Canvas = require('canvas');
 const Discord = require('discord.js');
 
 module.exports = {
-    execute: async (client, message, args) => {
+    execute: async (client, message, args, db) => {
 
     const canvas = Canvas.createCanvas(700, 250);
     const ctx = canvas.getContext('2d');

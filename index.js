@@ -9,7 +9,7 @@ const { ButtonInteraction } = require('discord.js');
 
 require('discord-reply'); //⚠️ IMPORTANT: put this before your discord.Client()
 
-/*
+
 // Création de la connexion à la DB
 const db = mysql.createConnection({
 
@@ -17,15 +17,18 @@ const db = mysql.createConnection({
  
     user: "root",
  
-    password: ""
+    password: "", 
+
+    database: "nosbotdiscord"
  
   });
 
 db.connect(function(err) {
 if (err) throw err;
 console.log("Connecté à la base de données MySQL!");
+
 });
-*/
+
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MESSAGES] });
@@ -42,6 +45,7 @@ client.on('message', message => {
     
     if(!command.startsWith(prefix)) return;
 
+    /* COMMANDS */
     switch(command){
         case prefix + 'ping':
             require('./commands/ping.js').execute(client, message, args);
@@ -53,12 +57,20 @@ client.on('message', message => {
             require('./commands/choose_class.js').execute(client, message, args);
             break;
         case prefix + 'card':
-            require('./commands/canvas.js').execute(client, message, args);
+            require('./commands/canvas.js').execute(client, message, args, db);
             break;
     }
     
 });
 
+//-------------------EARN-XP-----------------------------//
+client.on('message', message => {
+    /* EARN XP FOR EACH MSG */
+    if (!message.author.bot) {
+        require('./dao/update_player.js').execute(client, message, db);
+    }
+});
+//-------------------------------------------------------//
 
 // Button Handler
 client.on('interactionCreate', async (interaction) => {
