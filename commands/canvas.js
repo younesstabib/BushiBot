@@ -18,12 +18,14 @@ module.exports = {
     // Pseudo
     ctx.font = '28px sans-serif';
 	ctx.fillStyle = '#ffffff';
-	ctx.fillText(`${message.author.username}`, 225, 60);
+    ctx.textAlign = 'right';
+	ctx.fillText(`${message.author.username}`, 650, 60);
 
     // Level
-    ctx.font = '28px sans-serif';
+    ctx.font = '30px sans-serif';
 	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Lv. 99', 580, 60);
+    ctx.textAlign = 'left';
+	ctx.fillText('99', 225, 60);
 
     // Réputation
     ctx.font = '28px sans-serif';
