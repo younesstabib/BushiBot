@@ -1,65 +1,61 @@
 const Canvas = require('canvas');
 const Discord = require('discord.js');
+const mysql = require('mysql'); // Base de données MySQL
 
 module.exports = {
     execute: async (client, message, args, db) => {
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
+    let select_query = `SELECT * FROM user WHERE user_id = ?`;
 
-    let fontSize = 70;
+    let select_data = [message.author.id];
 
-    const background = await Canvas.loadImage('./img/rank-card.png');
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    db.query(select_query, select_data, async function (err, result) {
+        if (err) throw err;
+        // CANVAS
+        const canvas = Canvas.createCanvas(700, 250);
+        const ctx = canvas.getContext('2d');
 
-    const avatar = await Canvas.loadImage('./img/32080.png');
-    ctx.drawImage(avatar, 25, 38, 180, 180);
+        const background = await Canvas.loadImage('./img/rank-card.png');
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    // Pseudo
-    ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'right';
-	ctx.fillText(`${message.author.username}`, 650, 60);
+        let url_avatar = './img/' + result[0].avatar_id + '.png';
+        const avatar = await Canvas.loadImage(url_avatar);
+        ctx.drawImage(avatar, 25, 38, 180, 180);
 
-    // Level
-    ctx.font = '30px sans-serif';
-	ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'left';
-	ctx.fillText('99', 225, 60);
+        // Pseudo
+        ctx.font = '28px sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'right';
+        ctx.fillText(`${message.author.username}`, 650, 60);
 
-    // Réputation
-    ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Reputation', 240, 110);
+        // Level
+        ctx.font = '30px sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'left';
+        ctx.fillText(`${result[0].level}`, 225, 60);
 
-    // Titre
-    ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Titre : Dragonyx', 240, 140);
+        // Réputation
+        ctx.font = '28px sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(`Reputation : ${result[0].reputation}`, 240, 110);
 
-    // Gold
-    ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Gold : 10.000.000 gold', 240, 170);
+        // Titre
+        ctx.font = '28px sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(`Titre : ${result[0].title}`, 240, 140);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'example.png');
-    message.channel.send({ files: [attachment] });
+        // Gold
+        ctx.font = '28px sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(`Gold : ${result[0].gold}`, 240, 170);
+
+        const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'example.png');
+        message.channel.send({ files: [attachment] });
+    });
+
     }
 }
 
-// Pass the entire Canvas object because you'll need access to its width and context
-const applyText = (canvas, text) => {
-	const context = canvas.getContext('2d');
-
-	// Declare a base size of the font
-	let fontSize = 70;
-
-	do {
-		// Assign the font to the context and decrement it so it can be measured again
-		context.font = `${fontSize -= 10}px sans-serif`;
-		// Compare pixel width of the text to the canvas minus the approximate avatar size
-	} while (context.measureText(text).width > canvas.width - 300);
-
-	// Return the result to use in the actual canvas
-	return context.font;
+const test = async (message, result) => {
+    
 };
