@@ -1,16 +1,12 @@
 const Canvas = require('canvas');
 const Discord = require('discord.js');
-const mysql = require('mysql'); // Base de données MySQL
+const mysql = require('mysql2'); // Base de données MySQL
 
 module.exports = {
     execute: async (client, message, args, db) => {
-
-    let select_query = `SELECT * FROM user WHERE user_id = ?`;
-
-    let select_data = [message.author.id];
-
-    db.query(select_query, select_data, async function (err, result) {
-        if (err) throw err;
+    let qresult = require('../dao/get_playerinfos.js').execute(client, message, args, db); // Get player infos from db
+    
+    qresult.then(async function(result) {
         // CANVAS
         const canvas = Canvas.createCanvas(700, 250);
         const ctx = canvas.getContext('2d');

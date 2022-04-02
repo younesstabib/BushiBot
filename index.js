@@ -2,7 +2,7 @@
 const { Client, Intents } = require('discord.js');
 const { token } = require('./config.json');
 const { MessageActionRow, MessageButton } = require('discord.js');
-const mysql = require('mysql'); // Base de données MySQL
+const mysql = require('mysql2'); // Base de données MySQL
 const prefix = require('./config.json').prefix;
 const schedule = require('node-schedule'); // Envoi automatique de message
 const { ButtonInteraction } = require('discord.js');
@@ -59,6 +59,13 @@ client.on('message', message => {
         case prefix + 'card':
             require('./commands/canvas.js').execute(client, message, args, db);
             break;
+        /* case prefix + 'info':
+            let resultat = require('./dao/get_playerinfos.js').execute(client, message, args, db);
+            resultat.then(function(res) {
+                console.log("Level : "  +res[0].level);
+            });
+            break; 
+        // CODE SI JVEUT RECUP LES RESULTAT DUNE REQUETE QQL PART */
     }
     
 });

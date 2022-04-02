@@ -1,4 +1,4 @@
-const mysql = require('mysql'); // Base de données MySQL
+const mysql = require('mysql2'); // Base de données MySQL
 
 
 module.exports = {
@@ -8,13 +8,13 @@ module.exports = {
         let select_query = `SELECT * FROM user WHERE user_id = ?`;
 
         let select_data = [message.author.id];
-        db.query(select_query, select_data, function (err, select_result) {
+        db.query(select_query, select_data, function (err, select_result, fields) {
             if (err) throw err;
             if(select_result.length == 0){ // If user don't exist
                 // Create user
                 var insert_query = "INSERT INTO user (user_id, class, level, experience, reputation, title, gold, avatar_id, gender) VALUES (?, 'adventurer', 1, 0, 0, 'Debutant', 0, 32000, 'm')";
                 let insert_data = [message.author.id];
-                db.query(insert_query, insert_data, function (err, result) {
+                db.query(insert_query, insert_data, function (err, result, fields) {
                     if (err) throw err;
                     console.log("New user : " + message.author.username);
                 });

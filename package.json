@@ -7,6 +7,7 @@
     "discord-reply": "^0.1.2",
     "discord.js": "^13.5.0",
     "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "node-schedule": "^2.1.0"
   }
 }
