@@ -15,7 +15,8 @@ module.exports = {
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
         // Avatar
-        let url_avatar = './img/avatar/' + result[0].avatar_id + '.png';
+        let avatar_id = parseInt(getAvatarIco(result[0].class, result[0].sp, result[0].gender)); //class_id, sp_id, gender
+        let url_avatar = './img/avatar/' + avatar_id + '.png';
         const avatar = await Canvas.loadImage(url_avatar);
         ctx.drawImage(avatar, 25, 38, 180, 180);
 
@@ -202,4 +203,290 @@ function getReputationIco(rep){
     }
 
     return rep_ico;
+}
+
+function getAvatarIco(class_id, sp_id, gender){
+    let avatar_id = 0;
+    switch(class_id){
+        case 0:
+            // Adventurer
+            switch(gender){
+                case "m":
+                    avatar_id = 32020;
+                    break;
+                case "f":
+                    avatar_id = 32020;
+                    break;
+            }
+            break;
+        case 1:
+            // Swordman
+            switch(gender){
+                case "m":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32040;
+                            break;
+                        case 1:
+                            avatar_id = 32502;
+                            break;
+                        case 2:
+                            avatar_id = 32504;
+                            break;
+                        case 3:
+                            avatar_id = 32518;
+                            break;
+                        case 4:
+                            avatar_id = 32520;
+                            break;
+                        case 5:
+                            avatar_id = 32532;
+                            break;
+                        case 6:
+                            avatar_id = 32538;
+                            break;
+                        case 7:
+                            avatar_id = 32544;
+                            break;
+                        case 8:
+                            avatar_id = 32550;
+                            break;
+                        case 9:
+                            avatar_id = 32578;
+                            break;
+                    }
+                    break;
+                case "f":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32060;
+                            break;
+                        case 1:
+                            avatar_id = 32503;
+                            break;
+                        case 2:
+                            avatar_id = 32505;
+                            break;
+                        case 3:
+                            avatar_id = 32519;
+                            break;
+                        case 4:
+                            avatar_id = 32521;
+                            break;
+                        case 5:
+                            avatar_id = 32533;
+                            break;
+                        case 6:
+                            avatar_id = 32539;
+                            break;
+                        case 7:
+                            avatar_id = 32545;
+                            break;
+                        case 8:
+                            avatar_id = 32551;
+                            break;
+                        case 9:
+                            avatar_id = 32579;
+                            break;
+                    }
+                    break;
+            }
+            break;
+        case 2:
+            // Archer
+            switch(gender){
+                case "m":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32080;
+                            break;
+                        case 1:
+                            avatar_id = 32506;
+                            break;
+                        case 2:
+                            avatar_id = 32508;
+                            break;
+                        case 3:
+                            avatar_id = 32522;
+                            break;
+                        case 4:
+                            avatar_id = 32524;
+                            break;
+                        case 5:
+                            avatar_id = 32534;
+                            break;
+                        case 6:
+                            avatar_id = 32540;
+                            break;
+                        case 7:
+                            avatar_id = 32546;
+                            break;
+                        case 8:
+                            avatar_id = 32552;
+                            break;
+                        case 9:
+                            avatar_id = 32576;
+                            break;
+                    }
+                    break;
+                case "f":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32100;
+                            break;
+                        case 1:
+                            avatar_id = 32507;
+                            break;
+                        case 2:
+                            avatar_id = 32509;
+                            break;
+                        case 3:
+                            avatar_id = 32523;
+                            break;
+                        case 4:
+                            avatar_id = 32525;
+                            break;
+                        case 5:
+                            avatar_id = 32535;
+                            break;
+                        case 6:
+                            avatar_id = 32541;
+                            break;
+                        case 7:
+                            avatar_id = 32547;
+                            break;
+                        case 8:
+                            avatar_id = 32553;
+                            break;
+                        case 9:
+                            avatar_id = 32577;
+                            break;
+                    }
+                    break;
+            }
+            break;
+        case 3:
+            // Mage
+            switch(gender){
+                case "m":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32120;
+                            break;
+                        case 1:
+                            avatar_id = 32510;
+                            break;
+                        case 2:
+                            avatar_id = 32512;
+                            break;
+                        case 3:
+                            avatar_id = 32526;
+                            break;
+                        case 4:
+                            avatar_id = 32528;
+                            break;
+                        case 5:
+                            avatar_id = 32536;
+                            break;
+                        case 6:
+                            avatar_id = 32542;
+                            break;
+                        case 7:
+                            avatar_id = 32548;
+                            break;
+                        case 8:
+                            avatar_id = 32554;
+                            break;
+                        case 9:
+                            avatar_id = 32580;
+                            break;
+                    }
+                    break;
+                case "f":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32140;
+                            break;
+                        case 1:
+                            avatar_id = 32511;
+                            break;
+                        case 2:
+                            avatar_id = 32513;
+                            break;
+                        case 3:
+                            avatar_id = 32527;
+                            break;
+                        case 4:
+                            avatar_id = 32529;
+                            break;
+                        case 5:
+                            avatar_id = 32537;
+                            break;
+                        case 6:
+                            avatar_id = 32543;
+                            break;
+                        case 7:
+                            avatar_id = 32549;
+                            break;
+                        case 8:
+                            avatar_id = 32555;
+                            break;
+                        case 9:
+                            avatar_id = 32581;
+                            break;
+                    }
+                    break;
+            }
+            break;
+        case 4:
+            // Martial Artist
+            switch(gender){
+                case "m":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32160;
+                            break;
+                        case 1:
+                            avatar_id = 32556;
+                            break;
+                        case 2:
+                            avatar_id = 32560;
+                            break;
+                        case 3:
+                            avatar_id = 32564;
+                            break;
+                        case 4:
+                            avatar_id = 32566;
+                            break;
+                        case 5:
+                            avatar_id = 32584;
+                            break;
+                    }
+                    break;
+                case "f":
+                    switch(sp_id){
+                        case 0:
+                            avatar_id = 32180;
+                            break;
+                        case 1:
+                            avatar_id = 32557;
+                            break;
+                        case 2:
+                            avatar_id = 32561;
+                            break;
+                        case 3:
+                            avatar_id = 32565;
+                            break;
+                        case 4:
+                            avatar_id = 32567;
+                            break;
+                        case 5:
+                            avatar_id = 32585;
+                            break;
+                    }
+                    break;
+            }
+            break;
+    }
+    return avatar_id;
 }

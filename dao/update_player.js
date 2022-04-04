@@ -12,7 +12,7 @@ module.exports = {
             if (err) throw err;
             if(select_result.length == 0){ // If user don't exist
                 // Create user
-                var insert_query = "INSERT INTO user (user_id, class, level, experience, reputation, title, gold, avatar_id, gender, factions) VALUES (?, 'adventurer', 1, 0, 0, 'Debutant', 0, 32000, 'm', 'a')";
+                var insert_query = "INSERT INTO user (user_id, class, level, experience, reputation, title, gold, gender, factions, sp) VALUES (?, 'adventurer', 1, 0, 0, 'Debutant', 0, 32000, 'm', 'a', 0)";
                 let insert_data = [message.author.id];
                 db.query(insert_query, insert_data, function (err, result, fields) {
                     if (err) throw err;

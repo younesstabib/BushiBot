@@ -7,5 +7,14 @@ module.exports = {
         let data = [message.author.id];
         const [rows, fields] = await db.promise().query(query, data);
         return rows;
+    },
+    getplayerinfo: async (client, message, db) => {
+        let query = `SELECT * FROM user WHERE user_id = ?`;
+
+        let data = [message];
+        const [rows, fields] = await db.promise().query(query, data);
+        return rows;
     }
+
 }
+

@@ -85,34 +85,46 @@ client.on('interactionCreate', async (interaction) => {
     interaction.deferUpdate();
 	if (!interaction.isButton()) return;
 
-    // Attribution de la classe du personnage selon le choix de l'utilisateur
-    //TODO 
-    switch(interaction.customId){
-        case "archer":
-            interaction.channel.send("Tu as choisis la classe Archer");
-            // Enregistrement dans la db 
-            require('./dao/change_class.js').execute(client, interaction, db, 1);
-            break;
-        case "mage":
-            interaction.channel.send("Tu as choisis la classe Mage");
-            require('./dao/change_class.js').execute(client, interaction, db, 2);
-            // Enregistrement dans la db 
-            break;
-        case "escri":
-            interaction.channel.send("Tu as choisis la classe Escri");
-            require('./dao/change_class.js').execute(client, interaction, db, 3);
-            // Enregistrement dans la db 
-            break;
-        case "am":
-            interaction.channel.send("Tu as choisis la classe Artiste Martial");
-            require('./dao/change_class.js').execute(client, interaction, db, 4);
-            // Enregistrement dans la db 
-            break;
-    }
+    let resultat = require('./dao/get_playerinfos.js').getplayerinfo(client, interaction.user.id, db);
+    resultat.then(function(res) {
+        if(res[0].level < 15){
+            interaction.channel.send("Tu est trop bas niveau pour changer de classe. Level requis : 15");
+            return;
+        }
+        else
+        {
+            // Attribution de la classe du personnage selon le choix de l'utilisateur
+                //TODO 
+                switch(interaction.customId){
+                    case "archer":
+                        interaction.channel.send("Tu as choisis la classe Archer");
+                        // Enregistrement dans la db 
+                        require('./dao/change_class.js').execute(client, interaction, db, 2);
+                        break;
+                    case "mage":
+                        interaction.channel.send("Tu as choisis la classe Mage");
+                        require('./dao/change_class.js').execute(client, interaction, db, 3);
+                        // Enregistrement dans la db 
+                        break;
+                    case "escri":
+                        interaction.channel.send("Tu as choisis la classe Escri");
+                        require('./dao/change_class.js').execute(client, interaction, db, 1);
+                        // Enregistrement dans la db 
+                        break;
+                    case "am":
+                        interaction.channel.send("Tu as choisis la classe Artiste Martial");
+                        require('./dao/change_class.js').execute(client, interaction, db, 4);
+                        // Enregistrement dans la db 
+                        break;
+                }
+        }
+    });
+    
+    
     
 });
 
-// CI ASGOBAS //
+//------------------------------CI ASGOBAS------------------------------//
 
 // 11h30 à 5min
 const ci_asgobas_11h30_1 = schedule.scheduleJob('00 25 11 * * *', function(){ // scheduleJob('SECOND MINUTES HEURE JOUR MOIS *', function()
