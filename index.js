@@ -70,7 +70,7 @@ client.on('message', message => {
     
 });
 
-//-------------------EARN-XP-----------------------------//
+//-------------------EARN-XP-GOLD-REPUT-----------------------------//
 client.on('message', message => {
     /* EARN XP FOR EACH MSG */
     if (!message.author.bot) {
@@ -81,6 +81,7 @@ client.on('message', message => {
 
 // Button Handler
 client.on('interactionCreate', async (interaction) => {
+    
     interaction.deferUpdate();
 	if (!interaction.isButton()) return;
 
@@ -90,17 +91,21 @@ client.on('interactionCreate', async (interaction) => {
         case "archer":
             interaction.channel.send("Tu as choisis la classe Archer");
             // Enregistrement dans la db 
+            require('./dao/change_class.js').execute(client, interaction, db, 1);
             break;
         case "mage":
             interaction.channel.send("Tu as choisis la classe Mage");
+            require('./dao/change_class.js').execute(client, interaction, db, 2);
             // Enregistrement dans la db 
             break;
         case "escri":
             interaction.channel.send("Tu as choisis la classe Escri");
+            require('./dao/change_class.js').execute(client, interaction, db, 3);
             // Enregistrement dans la db 
             break;
         case "am":
             interaction.channel.send("Tu as choisis la classe Artiste Martial");
+            require('./dao/change_class.js').execute(client, interaction, db, 4);
             // Enregistrement dans la db 
             break;
     }

@@ -12,7 +12,7 @@ module.exports = {
             if (err) throw err;
             if(select_result.length == 0){ // If user don't exist
                 // Create user
-                var insert_query = "INSERT INTO user (user_id, class, level, experience, reputation, title, gold, avatar_id, gender) VALUES (?, 'adventurer', 1, 0, 0, 'Debutant', 0, 32000, 'm')";
+                var insert_query = "INSERT INTO user (user_id, class, level, experience, reputation, title, gold, avatar_id, gender, factions) VALUES (?, 'adventurer', 1, 0, 0, 'Debutant', 0, 32000, 'm', 'a')";
                 let insert_data = [message.author.id];
                 db.query(insert_query, insert_data, function (err, result, fields) {
                     if (err) throw err;
@@ -25,14 +25,15 @@ module.exports = {
                 // XP System Lv 2 = 200 exp, Lv3 = 300 exp, Lv4 = 400 exp etc....
                 let exp = parseInt(select_result[0].experience + 50);
                 let gold = parseInt(select_result[0].level * 100); // Earn gold method : Level * 100, so if u are level 5, u earn 500 golds
-                let update_query = `UPDATE user SET experience = experience + ?, gold = gold + ? WHERE user_id = ?`; // Query if dont level up
+                let rep = parseInt(select_result[0].level * Math.floor(Math.random() * 50)); // Earn random rep
+                let update_query = `UPDATE user SET experience = experience + ?, gold = gold + ?, reputation = reputation + ? WHERE user_id = ?`; // Query if dont level up
     
-                let update_data = [50, gold, message.author.id];
+                let update_data = [50, gold, rep, message.author.id];
 
                 if(exp / 100 >= select_result[0].level + 1) // On préshot le +50 d'xp et on check si par exemple 400 xp = a 4, si oui bah il up et on reset l'xp a 0
                 {
-                    update_query = `UPDATE user SET experience = 0, gold = gold + ?, level = level + 1 WHERE user_id = ?`;
-                    update_data = [gold, message.author.id];
+                    update_query = `UPDATE user SET experience = 0, gold = gold + ?, level = level + 1, reputation = reputation + ? WHERE user_id = ?`;
+                    update_data = [gold, rep, message.author.id];
 
                     // Level up 
                     levelup = parseInt(select_result[0].level + 1);
